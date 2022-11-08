@@ -12,10 +12,10 @@ Our viewer will support reading a calendar from a file or from `stdin`. The comm
 
 ``` bash
 # view a calendar file
-calender some_calendar.ics
+hcal some_calendar.ics
 
 # view a calendar from stdin
-curl https://some_calendar.ics | calendar
+curl https://some_calendar.ics | hcal
 ```
 
 The user can save the modified calendar by specifying a file name to save the new calendar as.
