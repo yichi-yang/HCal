@@ -2,7 +2,7 @@
 
 ## Overview
 
-We plan to implement a calendar viewer that can view calendars in iCalendar (`.ics`) format. The viewer will present the calendar using a terminal user interface similar to common calendar applications such as Google Calendar.
+We plan to implement a calendar viewer that can view calendars in iCalendar (`.ics`) format. The viewer will present the calendar using a terminal user interface in a layout similar to common calendar applications such as Google Calendar.
 
 ## Features
 
