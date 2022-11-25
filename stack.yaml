@@ -17,7 +17,7 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-19.33
+resolver: nightly-2022-11-12 # use ghc 9.2.4 for now since hls doesn't support 9.2.5 yet
   # url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/20/1.yaml
 
 # User packages to be built.
@@ -40,7 +40,11 @@ packages:
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
-# extra-deps: []
+extra-deps:
+  # iCalendar with relaxed dependencies, see https://github.com/chrra/iCalendar/pull/50
+  - git: https://github.com/zenhack/iCalendar.git
+    commit: 76f5d2e8328cb985f1ee5176e86a5cdd05a17934
+  - mime-0.4.0.2@sha256:208947d9d1a19d08850be67ecb28c6e776db697f3bba05bd9d682e51a59f241f,983
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
