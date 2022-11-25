@@ -26,6 +26,8 @@ source-repository head
 library
   exposed-modules:
       AppState
+      Config
+      DateTimeUtil
       Lib
   other-modules:
       Paths_hcal
@@ -35,11 +37,15 @@ library
   build-depends:
       base >=4.7 && <5
     , brick
+    , containers
     , data-default
     , iCalendar
     , microlens
     , microlens-mtl
     , microlens-th
+    , text
+    , time
+    , tz
     , vty
   default-language: Haskell2010
 
@@ -53,12 +59,16 @@ executable hcal-exe
   build-depends:
       base >=4.7 && <5
     , brick
+    , containers
     , data-default
     , hcal
     , iCalendar
     , microlens
     , microlens-mtl
     , microlens-th
+    , text
+    , time
+    , tz
     , vty
   default-language: Haskell2010
 
@@ -73,11 +83,15 @@ test-suite hcal-test
   build-depends:
       base >=4.7 && <5
     , brick
+    , containers
     , data-default
     , hcal
     , iCalendar
     , microlens
     , microlens-mtl
     , microlens-th
+    , text
+    , time
+    , tz
     , vty
   default-language: Haskell2010

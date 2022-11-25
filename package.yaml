@@ -28,6 +28,10 @@ dependencies:
 - vty
 - microlens
 - microlens-th
+- tz
+- time
+- text
+- containers
 
 ghc-options:
 - -Wall
