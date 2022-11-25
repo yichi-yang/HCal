@@ -1,0 +1,778 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:icalendar-ruby
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Yichi Yang Calendar (Canvas)
+X-WR-CALDESC:Calendar events for the user\, Yichi Yang
+BEGIN:VEVENT
+DTSTAMP:20220904T212400Z
+UID:event-calendar-event-790005
+DTSTART:20221025T210000Z
+DTEND:20221025T220000Z
+CLASS:PUBLIC
+DESCRIPTION:[Click here to join Zoom Meeting:952 6855 9718] (https://ucsd.z
+ oom.us/j/95268559718?pwd=c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09)
+LOCATION:Zoom Online Meeting
+SEQUENCE:0
+SUMMARY:CSE 221 -Professor Zhou Office Hour [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=10
+ &year=2022#calendar_event_790005
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a href="https://ucsd.zoom.us/j/95268559718?pwd
+ =c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09" target="_blank">Click here to join Zoom
+  Meeting:952 6855 9718</a></p><script src="https://instructure-uploads.s3.
+ amazonaws.com/account_131710000000000001/attachments/4724478/canvas_global
+ _app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221103T000400Z
+UID:event-assignment-526774
+DTSTART;VALUE=DATE;VALUE=DATE:20221025
+CLASS:PUBLIC
+DESCRIPTION:You have to work on the quiz independently. You cannot discuss 
+ with any other people.  Any form of discussion is considered cheating.\n\
+ nThis is open book and open note quiz.   But no search on the internet. 
+  You can access the reading list and the paper pdf files listed in the re
+ ading list on Canvas.\n\n 
+SEQUENCE:0
+SUMMARY:Quiz 2 [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=10
+ &year=2022#assignment_526774
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>You have to work on the quiz independently. <st
+ rong>You cannot discuss with any other people.</strong> &nbsp\;Any form of
+  discussion is considered cheating.</p>\n<p>This is open book and open not
+ e quiz. &nbsp\; But <strong>no search on the internet</strong>. &nbsp\;You
+  can access the reading list and the paper pdf files listed in the reading
+  list on Canvas.</p>\n<p>&nbsp\;</p><script src="https://instructure-uploa
+ ds.s3.amazonaws.com/account_131710000000000001/attachments/4724478/canvas_
+ global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220919T202400Z
+UID:event-calendar-event-797930
+DTSTART:20221026T233000Z
+DTEND:20221027T003000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:B 260A\, UCSD CSE Building
+SEQUENCE:0
+SUMMARY:Office Hour [Mayank] 5 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=10
+ &year=2022#calendar_event_797930
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221029T172500Z
+UID:event-assignment-558715
+DTSTART;VALUE=DATE;VALUE=DATE:20221026
+CLASS:PUBLIC
+DESCRIPTION:Sign-up for project group by going to People -> Groups and choo
+ sing a group.
+SEQUENCE:0
+SUMMARY:Project Group Signups [CSE230_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39514&month=10
+ &year=2022#assignment_558715
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Sign-up for project group by going to People -&
+ gt\; Groups and choosing a group.</p><script src="https://instructure-uplo
+ ads.s3.amazonaws.com/account_131710000000000001/attachments/4724478/canvas
+ _global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221018T001700Z
+UID:event-assignment-558356
+DTSTART;VALUE=DATE;VALUE=DATE:20221030
+CLASS:PUBLIC
+DESCRIPTION:Please follow the template \n\nhttps://www.overleaf.com/read/h
+ mgzrkrmbqsm\n\nand write your milestone report.
+SEQUENCE:0
+SUMMARY:Milestone 1  [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=10
+ &year=2022#assignment_558356
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Please follow the template&nbsp\;</p>\n<p><a cl
+ ass="external fOyUs_bGBk fbyHH_bGBk fbyHH_vIby" href="https://www.overleaf
+ .com/read/hmgzrkrmbqsm" target="_blank"><span>https://www.overleaf.com/rea
+ d/hmgzrkrmbqsm</span></a></p>\n<p>and write your milestone report.</p><scr
+ ipt src="https://instructure-uploads.s3.amazonaws.com/account_131710000000
+ 000001/attachments/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220904T212400Z
+UID:event-calendar-event-790006
+DTSTART:20221101T210000Z
+DTEND:20221101T220000Z
+CLASS:PUBLIC
+DESCRIPTION:[Click here to join Zoom Meeting:952 6855 9718] (https://ucsd.z
+ oom.us/j/95268559718?pwd=c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09)
+LOCATION:Zoom Online Meeting
+SEQUENCE:0
+SUMMARY:CSE 221 -Professor Zhou Office Hour [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#calendar_event_790006
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a href="https://ucsd.zoom.us/j/95268559718?pwd
+ =c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09" target="_blank">Click here to join Zoom
+  Meeting:952 6855 9718</a></p><script src="https://instructure-uploads.s3.
+ amazonaws.com/account_131710000000000001/attachments/4724478/canvas_global
+ _app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220919T202400Z
+UID:event-calendar-event-797931
+DTSTART:20221102T233000Z
+DTEND:20221103T003000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:B 260A\, UCSD CSE Building
+SEQUENCE:0
+SUMMARY:Office Hour [Mayank] 6 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#calendar_event_797931
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221023T051000Z
+UID:event-assignment-559298
+DTSTART;VALUE=DATE;VALUE=DATE:20221103
+CLASS:PUBLIC
+DESCRIPTION:[CSE291_HW2_Fall2022.pdf] (https://canvas.ucsd.edu/courses/3979
+ 2/files/8062611?wrap=1) \n\n[starter_code.zip] (https://canvas.ucsd.edu/c
+ ourses/39792/files/8062605?wrap=1) 
+SEQUENCE:0
+SUMMARY:HW2 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#assignment_559298
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a class="instructure_file_link instructure_scr
+ ibd_file inline_disabled" title="CSE291_HW2_Fall2022.pdf" href="https://ca
+ nvas.ucsd.edu/courses/39792/files/8062611?wrap=1" target="_blank" data-can
+ vas-previewable="false" data-api-endpoint="https://canvas.ucsd.edu/api/v1/
+ courses/39792/files/8062611" data-api-returntype="File">CSE291_HW2_Fall202
+ 2.pdf</a>&nbsp\;</p>\n<p><a class="instructure_file_link inline_disabled" 
+ title="starter_code.zip" href="https://canvas.ucsd.edu/courses/39792/files
+ /8062605?wrap=1" target="_blank" data-canvas-previewable="false" data-api-
+ endpoint="https://canvas.ucsd.edu/api/v1/courses/39792/files/8062605" data
+ -api-returntype="File">starter_code.zip</a>&nbsp\;</p><script src="https:/
+ /instructure-uploads.s3.amazonaws.com/account_131710000000000001/attachmen
+ ts/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220904T212400Z
+UID:event-calendar-event-790007
+DTSTART:20221108T220000Z
+DTEND:20221108T230000Z
+CLASS:PUBLIC
+DESCRIPTION:[Click here to join Zoom Meeting:952 6855 9718] (https://ucsd.z
+ oom.us/j/95268559718?pwd=c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09)
+LOCATION:Zoom Online Meeting
+SEQUENCE:0
+SUMMARY:CSE 221 -Professor Zhou Office Hour [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#calendar_event_790007
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a href="https://ucsd.zoom.us/j/95268559718?pwd
+ =c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09" target="_blank">Click here to join Zoom
+  Meeting:952 6855 9718</a></p><script src="https://instructure-uploads.s3.
+ amazonaws.com/account_131710000000000001/attachments/4724478/canvas_global
+ _app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221120T224600Z
+UID:event-assignment-526777
+DTSTART;VALUE=DATE;VALUE=DATE:20221108
+CLASS:PUBLIC
+DESCRIPTION:You have to work on the quiz independently. You cannot discuss 
+ with any other people.  Any form of discussion is considered cheating.\n\
+ nThis is open book and open note quiz.   But no search on the internet. 
+  You can access the reading list and the paper pdf files listed in the re
+ ading list on Canvas.\n\n 
+SEQUENCE:0
+SUMMARY:Quiz 3 [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#assignment_526777
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>You have to work on the quiz independently. <st
+ rong>You cannot discuss with any other people.</strong> &nbsp\;Any form of
+  discussion is considered cheating.</p>\n<p>This is open book and open not
+ e quiz. &nbsp\; But <strong>no search on the internet</strong>. &nbsp\;You
+  can access the reading list and the paper pdf files listed in the reading
+  list on Canvas.</p>\n<p>&nbsp\;</p><script src="https://instructure-uploa
+ ds.s3.amazonaws.com/account_131710000000000001/attachments/4724478/canvas_
+ global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221115T034900Z
+UID:event-assignment-526780
+DTSTART;VALUE=DATE;VALUE=DATE:20221108
+CLASS:PUBLIC
+DESCRIPTION:Please submit your draft as a group. That means\, for each grou
+ p\, you need to select your group and submit only one time.
+SEQUENCE:0
+SUMMARY:Draft of Memory Operations [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#assignment_526780
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Please submit your draft as a group. That means
+ \, for each group\, you need to select your group and submit only one time
+ .</p><script src="https://instructure-uploads.s3.amazonaws.com/account_131
+ 710000000000001/attachments/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220919T202400Z
+UID:event-calendar-event-797932
+DTSTART:20221110T003000Z
+DTEND:20221110T013000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:B 260A\, UCSD CSE Building
+SEQUENCE:0
+SUMMARY:Office Hour [Mayank] 7 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#calendar_event_797932
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221117T031300Z
+UID:event-assignment-561453
+DTSTART;VALUE=DATE;VALUE=DATE:20221109
+CLASS:PUBLIC
+DESCRIPTION:Please submit the URL of your project's github repository. The 
+ project proposal must be in the README of the repository.
+SEQUENCE:0
+SUMMARY:Project Proposal [CSE230_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39514&month=11
+ &year=2022#assignment_561453
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Please submit the URL of your project's github 
+ repository. The project proposal must be in the README of the repository.<
+ /p><script src="https://instructure-uploads.s3.amazonaws.com/account_13171
+ 0000000000001/attachments/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221103T035100Z
+UID:event-assignment-561760
+DTSTART;VALUE=DATE;VALUE=DATE:20221113
+CLASS:PUBLIC
+DESCRIPTION:Please follow the template \n\nhttps://www.overleaf.com/read/h
+ mgzrkrmbqsm\n\nand write your milestone II  report.
+SEQUENCE:0
+SUMMARY:Milestone 2 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#assignment_561760
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Please follow the template&nbsp\;</p>\n<p><a cl
+ ass="external fOyUs_bGBk fbyHH_bGBk fbyHH_vIby" href="https://www.overleaf
+ .com/read/hmgzrkrmbqsm" target="_blank"><span>https://www.overleaf.com/rea
+ d/hmgzrkrmbqsm</span></a></p>\n<p>and write your milestone II&nbsp\; repor
+ t.</p><script src="https://instructure-uploads.s3.amazonaws.com/account_13
+ 1710000000000001/attachments/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220904T212400Z
+UID:event-calendar-event-790008
+DTSTART:20221115T220000Z
+DTEND:20221115T230000Z
+CLASS:PUBLIC
+DESCRIPTION:[Click here to join Zoom Meeting:952 6855 9718] (https://ucsd.z
+ oom.us/j/95268559718?pwd=c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09)
+LOCATION:Zoom Online Meeting
+SEQUENCE:0
+SUMMARY:CSE 221 -Professor Zhou Office Hour [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#calendar_event_790008
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a href="https://ucsd.zoom.us/j/95268559718?pwd
+ =c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09" target="_blank">Click here to join Zoom
+  Meeting:952 6855 9718</a></p><script src="https://instructure-uploads.s3.
+ amazonaws.com/account_131710000000000001/attachments/4724478/canvas_global
+ _app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221021T174900Z
+UID:event-assignment-526784
+DTSTART;VALUE=DATE;VALUE=DATE:20221115
+CLASS:PUBLIC
+DESCRIPTION:Answer the following questions. For questions asking for short 
+ answers\, there may not necessarily be a "right" answer\, although some an
+ swers may be more compelling and/or much easier to justify. But I am inter
+ ested in your explanation (the "why") as much as the answer itself. Also\,
+  do not use shorthand: write your answers using complete sentences.\n\n*\n
+ \n* (GMS Design) In the GMS paper\, only ”clean” pages are written to
+  global memory (“dirty” pages must be written to disk before they can 
+ participate in the GMS pool).\n\n \n\n* Why did GMS chose this restrictio
+ n? What problem does it solve?\n\n* Describe how you might change GMS to s
+ afely allow it to write dirty pages to the global memory.\n\n* Why does GM
+ S require trusted nodes? What risks would be exposed by an untrusted node?
+ \n\n* Describe how you might change GMS to work with untrusted nodes?\n\n
+  \n\n* (Transparency vs Optimization) Butler Lampson once gave a set of 
+ principles for system design. Among these\, he gave two conflicting pieces
+  of advice on the nature of implementations. He said\,\n\n“Keep secrets 
+ of the implementation. Secrets are assumptions about an implementation tha
+ t client programs are not allowed to make... Obviously\, it is easier to p
+ rogram and modify a system if its parts make fewer assumptions about each 
+ other.”\n\nAnd yet\,\n\n“One way to improve performance is to increase
+  the number of assumptions that one part of a system makes about another\;
+  the additional assumptions often allow less work to be done\, sometimes a
+  lot less.”\n\nThat is\, on the one hand we should hide an implementatio
+ n for ease of development (transparency)\, and\, on the other\, we should 
+ expose our implementations for speed (optimization). Consider this issue f
+ or each of the following three systems – Sprite\, Xen\, Grapevine. For e
+ ach System\n\n \n\n* Which advice of Lampson’s did the authors follow? 
+ Describe the service that was implemented\, and whether the authors chose 
+ to hide or expose in the implementation.\n\n* Describe what was hidden or 
+ exposed in the implementation\, and the software mechanisms that were used
+  to do the hiding or exposing. Be specific.\n\n* Give a concrete example o
+ f how the mechanisms above were used to hide or expose in the system.\n\n*
+  Describe one problem the authors had in utilizing their mechanism for the
+ ir respective purpose\, and how the authors dealt with that problem. Be sp
+ ecific.\n\n* Given the quotes above\, discuss the authors’ goals in foll
+ owing the design principle they chose. Did they achieve them? Justify your
+  answer.\n\n* (Lazy Evaluation) When implementing some service a common t
+ radeoff is between “eager evaluation” — performing an action immedia
+ tely when it is requested (hoping to amortize that cost against future acc
+ esses) and “lazy evaluation” — deferring the requested action until 
+ some later point in time (assuming that it will cost less or may not need 
+ to be done in the future). What choice to make depends both on the cost of
+  the operation and the expected workload.\n\n*\n\n*\n\n*\n\n* For each of 
+ the following systems\, identify an important operation that uses eager or
+  lazy evaluation as an optimization.\n\n* Explain what the operation is an
+ d what the required semantics are for it to be correct.\n\n* Describe how 
+ the implementation is eager or lazy (including any mechanisms used to ensu
+ re correctness) and why this is expected to provide an optimization in the
+  common case.\n\n* Finally\, describe a workload scenario in which this im
+ plementation will not be an optimization.\n\n3.1 Mach\n3.2 Exokernel\n3.3 
+ Xen\n3.4 VAX/VMS\n\n 
+SEQUENCE:0
+SUMMARY:Homework2 [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#assignment_526784
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Answer the following questions. For questions a
+ sking for short answers\, there may not necessarily be a "right" answer\, 
+ although some answers may be more compelling and/or much easier to justify
+ . But I am interested in your explanation (the "why") as much as the answe
+ r itself. Also\, do not use shorthand: write your answers using complete s
+ entences.</p>\n<ol>\n<li style="list-style-type: none\;">\n<ol>\n<li><stro
+ ng>(GMS Design)</strong><span>&nbsp\;</span>In the GMS paper\, only ”cle
+ an” pages are written to global memory (“dirty” pages must be writte
+ n to disk before they can participate in the GMS pool).\n<p>&nbsp\;</p>\n<
+ ol>\n<li>Why did GMS chose this restriction? What problem does it solve?</
+ li>\n<li>Describe how you might change GMS to safely allow it to write dir
+ ty pages to the global memory.</li>\n<li>Why does GMS require trusted node
+ s? What risks would be exposed by an untrusted node?</li>\n<li>Describe ho
+ w you might change GMS to work with untrusted nodes?</li>\n</ol>\n<p>&nbsp
+ \;</p>\n</li>\n<li><strong>(Transparency vs Optimization)</strong><span>&n
+ bsp\;</span>Butler Lampson once gave a set of principles for system design
+ . Among these\, he gave two conflicting pieces of advice on the nature of 
+ implementations. He said\,\n<blockquote>“Keep secrets of the implementat
+ ion. Secrets are assumptions about an implementation that client programs 
+ are not allowed to make... Obviously\, it is easier to program and modify 
+ a system if its parts make fewer assumptions about each other.”</blockqu
+ ote>\nAnd yet\,\n<blockquote>“One way to improve performance is to incre
+ ase the number of assumptions that one part of a system makes about anothe
+ r\; the additional assumptions often allow less work to be done\, sometime
+ s a lot less.”</blockquote>\nThat is\, on the one hand we should hide an
+  implementation for ease of development (transparency)\, and\, on the othe
+ r\, we should expose our implementations for speed (optimization). Conside
+ r this issue for each of the following three systems – Sprite\, Xen\, Gr
+ apevine. For each System\n<p>&nbsp\;</p>\n<ol>\n<li>Which advice of Lampso
+ n’s did the authors follow? Describe the service that was implemented\, 
+ and whether the authors chose to hide or expose in the implementation.</li
+ >\n<li>Describe what was hidden or exposed in the implementation\, and the
+  software mechanisms that were used to do the hiding or exposing. Be speci
+ fic.</li>\n<li>Give a concrete example of how the mechanisms above were us
+ ed to hide or expose in the system.</li>\n<li>Describe one problem the aut
+ hors had in utilizing their mechanism for their respective purpose\, and h
+ ow the authors dealt with that problem. Be specific.</li>\n<li>Given the q
+ uotes above\, discuss the authors’ goals in following the design princip
+ le they chose. Did they achieve them? Justify your answer.</li>\n</ol>\n</
+ li>\n<li><strong style="font-family: inherit\; font-size: 1rem\;">(Lazy Ev
+ aluation)</strong><span style="font-family: inherit\; font-size: 1rem\;">&
+ nbsp\;</span><span style="font-family: inherit\; font-size: 1rem\;">When i
+ mplementing some service a common tradeoff is between “eager evaluation
+ ” — performing an action immediately when it is requested (hoping to a
+ mortize that cost against future accesses) and “lazy evaluation” — d
+ eferring the requested action until some later point in time (assuming tha
+ t it will cost less or may not need to be done in the future). What choice
+  to make depends both on the cost of the operation and the expected worklo
+ ad.</span></li>\n</ol>\n</li>\n</ol>\n<ol>\n<li style="list-style-type: no
+ ne\;">\n<ol>\n<li style="list-style-type: none\;">\n<ol>\n<ol>\n<li style=
+ "list-style-type: none\;">\n<ol>\n<li>For each of the following systems\, 
+ identify an important operation that uses eager or lazy evaluation as an o
+ ptimization.</li>\n<li>Explain what the operation is and what the required
+  semantics are for it to be correct.</li>\n<li>Describe how the implementa
+ tion is eager or lazy (including any mechanisms used to ensure correctness
+ ) and why this is expected to provide an optimization in the common case.<
+ /li>\n<li>Finally\, describe a workload scenario in which this implementat
+ ion will not be an optimization.</li>\n</ol>\n</li>\n</ol>\n</ol>\n<span>3
+ .1 Mach</span><br><span>3.2 Exokernel</span><br><span>3.3 Xen</span><br><s
+ pan>3.4 VAX/VMS</span></li>\n</ol>\n</li>\n</ol>\n<p>&nbsp\;</p><script sr
+ c="https://instructure-uploads.s3.amazonaws.com/account_131710000000000001
+ /attachments/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220919T202400Z
+UID:event-calendar-event-797933
+DTSTART:20221117T003000Z
+DTEND:20221117T013000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:B 260A\, UCSD CSE Building
+SEQUENCE:0
+SUMMARY:Office Hour [Mayank] 8 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#calendar_event_797933
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221122T183000Z
+UID:event-assignment-564121
+DTSTART;VALUE=DATE;VALUE=DATE:20221120
+CLASS:PUBLIC
+DESCRIPTION:Please use the poster template \n\n[https://docs.google.com/pr
+ esentation/d/13Ga-2oZ9LtVYZIOiHpzYKkKe3XkMYRxtqMhz8hNnqU0/edit#slide=id.p4
+ ] (https://docs.google.com/presentation/d/13Ga-2oZ9LtVYZIOiHpzYKkKe3XkMYRx
+ tqMhz8hNnqU0/edit?usp=sharing)\n\nto make a poster for your project.  Upl
+ oad a PDF of your poster to Canvas. \n\nUse more figure and less text
+SEQUENCE:0
+SUMMARY:Poster Presentation [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#assignment_564121
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Please use the poster template&nbsp\;</p>\n<p><
+ a href="https://docs.google.com/presentation/d/13Ga-2oZ9LtVYZIOiHpzYKkKe3X
+ kMYRxtqMhz8hNnqU0/edit?usp=sharing" target="_blank">https://docs.google.co
+ m/presentation/d/13Ga-2oZ9LtVYZIOiHpzYKkKe3XkMYRxtqMhz8hNnqU0/edit#slide=i
+ d.p4</a></p>\n<p>to make a poster for your project.&nbsp\; Upload a PDF of
+  your poster to Canvas.&nbsp\;</p>\n<p>Use more figure and less text</p><s
+ cript src="https://instructure-uploads.s3.amazonaws.com/account_1317100000
+ 00000001/attachments/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220904T212400Z
+UID:event-calendar-event-790009
+DTSTART:20221122T220000Z
+DTEND:20221122T230000Z
+CLASS:PUBLIC
+DESCRIPTION:[Click here to join Zoom Meeting:952 6855 9718] (https://ucsd.z
+ oom.us/j/95268559718?pwd=c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09)
+LOCATION:Zoom Online Meeting
+SEQUENCE:0
+SUMMARY:CSE 221 -Professor Zhou Office Hour [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#calendar_event_790009
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a href="https://ucsd.zoom.us/j/95268559718?pwd
+ =c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09" target="_blank">Click here to join Zoom
+  Meeting:952 6855 9718</a></p><script src="https://instructure-uploads.s3.
+ amazonaws.com/account_131710000000000001/attachments/4724478/canvas_global
+ _app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221122T080100Z
+UID:event-assignment-526778
+DTSTART;VALUE=DATE;VALUE=DATE:20221122
+CLASS:PUBLIC
+DESCRIPTION:You have to work on the quiz independently. You cannot discuss 
+ with any other people.  Any form of discussion is considered cheating.\n\
+ nThis is open book and open note quiz.   But no search on the internet. 
+  You can access the reading list and the paper pdf files listed in the re
+ ading list on Canvas.\n\n 
+SEQUENCE:0
+SUMMARY:Quiz 4 [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#assignment_526778
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>You have to work on the quiz independently. <st
+ rong>You cannot discuss with any other people.</strong> &nbsp\;Any form of
+  discussion is considered cheating.</p>\n<p>This is open book and open not
+ e quiz. &nbsp\; But <strong>no search on the internet</strong>. &nbsp\;You
+  can access the reading list and the paper pdf files listed in the reading
+  list on Canvas.</p>\n<p>&nbsp\;</p><script src="https://instructure-uploa
+ ds.s3.amazonaws.com/account_131710000000000001/attachments/4724478/canvas_
+ global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220919T202400Z
+UID:event-calendar-event-797934
+DTSTART:20221124T003000Z
+DTEND:20221124T013000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:B 260A\, UCSD CSE Building
+SEQUENCE:0
+SUMMARY:Office Hour [Mayank] 9 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#calendar_event_797934
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220904T212400Z
+UID:event-calendar-event-790010
+DTSTART:20221129T220000Z
+DTEND:20221129T230000Z
+CLASS:PUBLIC
+DESCRIPTION:[Click here to join Zoom Meeting:952 6855 9718] (https://ucsd.z
+ oom.us/j/95268559718?pwd=c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09)
+LOCATION:Zoom Online Meeting
+SEQUENCE:0
+SUMMARY:CSE 221 -Professor Zhou Office Hour [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=11
+ &year=2022#calendar_event_790010
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><a href="https://ucsd.zoom.us/j/95268559718?pwd
+ =c1JvZnpaUk5uVjJ4a0pLYlZJS3ZuUT09" target="_blank">Click here to join Zoom
+  Meeting:952 6855 9718</a></p><script src="https://instructure-uploads.s3.
+ amazonaws.com/account_131710000000000001/attachments/4724478/canvas_global
+ _app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220919T202400Z
+UID:event-calendar-event-797935
+DTSTART:20221201T003000Z
+DTEND:20221201T013000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:B 260A\, UCSD CSE Building
+SEQUENCE:0
+SUMMARY:Office Hour [Mayank] 10 [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=11
+ &year=2022#calendar_event_797935
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221115T175800Z
+UID:event-assignment-526785
+DTSTART;VALUE=DATE;VALUE=DATE:20221201
+CLASS:PUBLIC
+DESCRIPTION:Answer the following questions. For questions asking for short 
+ answers\, there may not necessarily be a "right" answer\, although some an
+ swers may be more compelling and/or much easier to justify. But I am inter
+ ested in your explanation (the "why") as much as the answer itself. Also\,
+  do not use shorthand: write your answers using complete sentences.\n\n* (
+ Scheduler Activations) The Scheduler Activations paper states that deadlo
+ ck is potentially an issue when activations perform an upcall:\n\n \n\n
+ “One issue we have not yet addressed is that a user-level thread could b
+ e executing in a critical section at the instant when it is blocked or pre
+ empted...[a] possible ill effect ... [is] deadlock (e.g.\, the preempted t
+ hread could be holding a lock on the user-level thread ready list\; if so\
+ , deadlock would occur if the upcall attempted to place the preempted thre
+ ad onto the ready list). (p. 102)”\n\n \n\nWhy is this not a concern wi
+ th standard kernel threads\, i.e.\, why do scheduler activations have to w
+ orry about this deadlock issue\, but standard kernel threads implementatio
+ ns do not have to?\n\n \n\n* (LFS) The LFS paper is strongly motivated b
+ y perceived trends in both hardware performance and user access patterns. 
+ Thus\, its improved performance is driven by a set of underlying assumptio
+ ns.\n\n \n\n* Explain what are the assumptions about hardware and access 
+ patterns that LFS depends on?\n\n* Explain which mechanisms in LFS depend 
+ on each assumption?\n\n \n\nFor the purposes of the following questions\,
+  NVRAM is persistent storage (i.e.\, will survive the loss of power) and h
+ as access times and throughput similar to DRAM.\n\n* At the time the LFS p
+ aper was written\, non-volatile RAM (NVRAM) was not commonly available. If
+  disks were replaced with NVRAM entirely\, would the LFS design still make
+  sense? Explain why or why not and be specific in justifying your answer.\
+ n\n* In real-life the cost per byte of disk is likely to be far cheaper th
+ an NVRAM for some time. So instead\, consider a situation where some NVRAM
+  is available (e.g.\, 1/10th of the disk size). This NVRAM might be used f
+ or caching reads\, caching writes\, or storing particular meta-data. Argue
+  which use might be most appropriate for improving the performance of LFS.
+SEQUENCE:0
+SUMMARY:Homework3 [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=12
+ &year=2022#assignment_526785
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Answer the following questions. For questions a
+ sking for short answers\, there may not necessarily be a "right" answer\, 
+ although some answers may be more compelling and/or much easier to justify
+ . But I am interested in your explanation (the "why") as much as the answe
+ r itself. Also\, do not use shorthand: write your answers using complete s
+ entences.</p>\n<ol>\n<li><strong>(Scheduler Activations)</strong><span>&nb
+ sp\;</span>The Scheduler Activations paper states that deadlock is potenti
+ ally an issue when activations perform an upcall:\n<p>&nbsp\;</p>\n<blockq
+ uote>“One issue we have not yet addressed is that a user-level thread co
+ uld be executing in a critical section at the instant when it is blocked o
+ r preempted...[a] possible ill effect ... [is] deadlock (e.g.\, the preemp
+ ted thread could be holding a lock on the user-level thread ready list\; i
+ f so\, deadlock would occur if the upcall attempted to place the preempted
+  thread onto the ready list). (p. 102)”</blockquote>\n<p>&nbsp\;</p>\nWh
+ y is this not a concern with standard kernel threads\, i.e.\, why do sched
+ uler activations have to worry about this deadlock issue\, but standard ke
+ rnel threads implementations do not have to?\n<p>&nbsp\;</p>\n</li>\n<li><
+ strong>(LFS)</strong><span>&nbsp\;</span>The LFS paper is strongly motivat
+ ed by perceived trends in both hardware performance and user access patter
+ ns. Thus\, its improved performance is driven by a set of underlying assum
+ ptions.\n<p>&nbsp\;</p>\n<ol>\n<ol>\n<li>Explain what are the assumptions 
+ about hardware and access patterns that LFS depends on?</li>\n<li>Explain 
+ which mechanisms in LFS depend on each assumption?</li>\n</ol>\n</ol>\n<p>
+ &nbsp\;</p>\n<p>For the purposes of the following questions\, NVRAM is per
+ sistent storage (i.e.\, will survive the loss of power) and has access tim
+ es and throughput similar to DRAM.</p>\n<ol>\n<li>At the time the LFS pape
+ r was written\, non-volatile RAM (NVRAM) was not commonly available. If di
+ sks were replaced with NVRAM entirely\, would the LFS design still make se
+ nse? Explain why or why not and be specific in justifying your answer.</li
+ >\n<li>In real-life the cost per byte of disk is likely to be far cheaper 
+ than NVRAM for some time. So instead\, consider a situation where some NVR
+ AM is available (e.g.\, 1/10th of the disk size). This NVRAM might be used
+  for caching reads\, caching writes\, or storing particular meta-data. Arg
+ ue which use might be most appropriate for improving the performance of LF
+ S.</li>\n</ol>\n</li>\n</ol><script src="https://instructure-uploads.s3.am
+ azonaws.com/account_131710000000000001/attachments/4724478/canvas_global_a
+ pp.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221121T201900Z
+UID:event-assignment-565818
+DTSTART;VALUE=DATE;VALUE=DATE:20221204
+CLASS:PUBLIC
+DESCRIPTION:Follow the template and write your final report. The texts in r
+ ed are new components from the milestone report.\n\nhttps://www.overleaf.c
+ om/read/hmgzrkrmbqsm
+SEQUENCE:0
+SUMMARY:Final Report [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=12
+ &year=2022#assignment_565818
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>Follow the template and write your final report
+ . The texts in red are new components from the milestone report.</p>\n<p>h
+ ttps://www.overleaf.com/read/hmgzrkrmbqsm</p><script src="https://instruct
+ ure-uploads.s3.amazonaws.com/account_131710000000000001/attachments/472447
+ 8/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220927T191800Z
+UID:event-assignment-553569
+DTSTART;VALUE=DATE;VALUE=DATE:20221204
+CLASS:PUBLIC
+DESCRIPTION:Present the following components in class with [Presentation T
+ emplate] (https://urldefense.com/v3/__https://docs.google.com/presentation
+ /d/1WgCMRmCsMVpSKVPeSNTuPPZX8-Qm4k5OQ2KrsWdE9Uc/edit?usp=sharing__\;!!Mih3
+ wA!VNSPjRfS-so0A4GOcV5QMs2CYaNr1ZZht9iu9nvTEEb59C9NQCZktjCYUHoWo14$):\n\n1
+ . introduction: an overview of the problem and why is this problem diffic
+ ult\n\n2. related work: what has been done so far \n\n3. method: what is 
+ the key technical contribution of the paper\n\n4. experiments: what are t
+ he data and baselines\, what are the results\n\n5. discussion: findings f
+ rom Piazza discussion and your own reading
+SEQUENCE:0
+SUMMARY:Paper Presentation [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=12
+ &year=2022#assignment_553569
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><strong>Present the following components in cla
+ ss with<span>&nbsp\;</span><a href="https://urldefense.com/v3/__https://do
+ cs.google.com/presentation/d/1WgCMRmCsMVpSKVPeSNTuPPZX8-Qm4k5OQ2KrsWdE9Uc/
+ edit?usp=sharing__\;!!Mih3wA!VNSPjRfS-so0A4GOcV5QMs2CYaNr1ZZht9iu9nvTEEb59
+ C9NQCZktjCYUHoWo14$" target="_blank" data-saferedirecturl="https://www.goo
+ gle.com/url?q=https://urldefense.com/v3/__https://docs.google.com/presenta
+ tion/d/1WgCMRmCsMVpSKVPeSNTuPPZX8-Qm4k5OQ2KrsWdE9Uc/edit?usp%3Dsharing__\;
+ !!Mih3wA!VNSPjRfS-so0A4GOcV5QMs2CYaNr1ZZht9iu9nvTEEb59C9NQCZktjCYUHoWo14$&
+ amp\;source=gmail&amp\;ust=1664392224662000&amp\;usg=AOvVaw3UIBLwI_BE5JS5p
+ z-ZUypQ">Presentation Template</a>:</strong></p>\n<p>1. introduction: an o
+ verview of the problem and&nbsp\;why is this problem difficult</p>\n<p>2. 
+ related work: what has been done so far&nbsp\;</p>\n<p>3. method: what is 
+ the key technical contribution of the<span>&nbsp\;</span><span class="il">
+ paper</span></p>\n<p>4. experiments: what are the data and baselines\, wha
+ t are the results</p>\n<p>5.<span>&nbsp\;</span><span class="il">discussio
+ n</span>: findings from<span>&nbsp\;</span><span class="il">Piazza</span><
+ span>&nbsp\;</span><span class="il">discussion</span><span>&nbsp\;</span>a
+ nd your own reading</p><script src="https://instructure-uploads.s3.amazona
+ ws.com/account_131710000000000001/attachments/4724478/canvas_global_app.js
+ "></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20220927T191700Z
+UID:event-assignment-553568
+DTSTART;VALUE=DATE;VALUE=DATE:20221204
+CLASS:PUBLIC
+DESCRIPTION:1. Sign up to lead one discussion lecture\n\n[Sign Up Sheet] 
+ (https://docs.google.com/spreadsheets/d/18PYbDyI1Bc6sGKeZzmfCesulFZYznphQa
+ LZHuJXRwxI/edit?usp=sharing)\n\n \n\n2. Start a post on Piazza with the
+  title: 'Lecture # [Your Name] [Paper Title]'. First come first serve.\n
+ \nWrite down the following contents\n\n1. overview: summary of the paper\
+ n\n2. strength: three main strengths of the paper\n\n3. weakness: three m
+ ain weaknesses of the paper\n\n4. improvement: ideas for improving the we
+ akness \n\n 
+SEQUENCE:0
+SUMMARY:Piazza Paper Discussion  [CSE291_FA22_B00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_39792&month=12
+ &year=2022#assignment_553568
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p><strong>1. Sign up to lead one<span>&nbsp\;</sp
+ an><span class="il">discussion</span><span>&nbsp\;</span>lecture</strong><
+ /p>\n<p><a href="https://docs.google.com/spreadsheets/d/18PYbDyI1Bc6sGKeZz
+ mfCesulFZYznphQaLZHuJXRwxI/edit?usp=sharing" target="_blank" data-saferedi
+ recturl="https://www.google.com/url?q=https://urldefense.com/v3/__https://
+ docs.google.com/spreadsheets/d/16c-GmbjnlO8Bv9k50OA6BCPM4MwgWFV0l-Ly287j6V
+ g/edit?usp%3Dsharing__\;!!Mih3wA!RyQjbNir9qVG1EAfh1CvTM5ADAiDqL4IGHlVXcoFZ
+ NSTSYp67ZhGA1s5EqgPYFU$&amp\;source=gmail&amp\;ust=1664392224662000&amp\;u
+ sg=AOvVaw16MTzC4aN3g1cxwalambog">Sign Up Sheet</a></p>\n<p>&nbsp\;</p>\n<p
+ ><strong>2. Start a post on<span>&nbsp\;</span><span class="il">Piazza</sp
+ an>&nbsp\;with the title:&nbsp\;'Lecture # [Your Name] [<span class="il">P
+ aper</span><span>&nbsp\;</span>Title]'. First come first serve.</strong></
+ p>\n<p><strong>Write down the following contents</strong></p>\n<p>1. overv
+ iew: summary of the<span>&nbsp\;</span><span class="il">paper</span></p>\n
+ <p>2. strength: three main strengths of the<span>&nbsp\;</span><span class
+ ="il">paper</span></p>\n<p>3. weakness: three main weaknesses of the<span>
+ &nbsp\;</span><span class="il">paper</span></p>\n<p>4. improvement: ideas 
+ for improving the weakness&nbsp\;</p>\n<p>&nbsp\;</p><script src="https://
+ instructure-uploads.s3.amazonaws.com/account_131710000000000001/attachment
+ s/4724478/canvas_global_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20221122T204200Z
+UID:event-assignment-526781
+DTSTART;VALUE=DATE;VALUE=DATE:20221206
+CLASS:PUBLIC
+DESCRIPTION:There are two steps for submission. \n\n1) Submit your report 
+ on Canvas as a group. \n\n2) Email us your code to the TAs (hhuang@eng.uc
+ sd.edu\, lizhong@eng.ucsd.edu)\n\n* Use your UCSD email (also cc all your 
+ teammates). That means everyone in your group needs to submit once. \n\n*
+  The subject of the email should contain CSE221.\n\n* In the root directo
+ ry of the code package\, provide a README file on how to compile and run
+  your code (e.g. Makefile and a shell script to run the experiments).\n\
+ n \n\n \n\n 
+SEQUENCE:0
+SUMMARY:Final report with all measurements plus code [CSE221_FA22_A00]
+URL:https://canvas.ucsd.edu/calendar?include_contexts=course_40815&month=12
+ &year=2022#assignment_526781
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_131710000000000001/attachments/4724479
+ /canvas_global_app.css"><p>There are <strong>two steps</strong> for submis
+ sion.&nbsp\;</p>\n<p>1) Submit your <strong>report</strong> on Canvas as a
+  <strong>group</strong>.&nbsp\;</p>\n<p>2) <strong>Email</strong> us your 
+ <strong>code</strong> to the TAs (<span>hhuang@eng.ucsd.edu</span>\, lizho
+ ng@<span>eng.</span>ucsd.edu)</p>\n<ul>\n<li>Use your <strong>UCSD</strong
+ > email (also cc all your teammates). That means everyone in your group ne
+ eds to submit once.&nbsp\;</li>\n<li>The subject of the email should conta
+ in&nbsp\;<code>CSE221</code>.</li>\n<li>In the root directory of the code 
+ package\, provide a&nbsp\;<code>README</code>&nbsp\;file on how to compile
+  and run your code (e.g.&nbsp\;<code>Makefile</code>&nbsp\;and a shell scr
+ ipt to run the experiments).</li>\n</ul>\n<p>&nbsp\;</p>\n<p>&nbsp\;</p>\n
+ <p>&nbsp\;</p><script src="https://instructure-uploads.s3.amazonaws.com/ac
+ count_131710000000000001/attachments/4724478/canvas_global_app.js"></scrip
+ t>
+END:VEVENT
+END:VCALENDAR
