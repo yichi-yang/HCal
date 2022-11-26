@@ -27,7 +27,9 @@ import Brick.Widgets.Core
     txt,
     vBox,
     withDefAttr,
-    (<=>)
+    (<=>),
+    hBox,
+    (<+>)
   )
 import Control.Monad (void)
 import Data.Default
@@ -58,7 +60,7 @@ data Name
 
 drawUi :: St -> [Widget Name]
 drawUi st =
-  [drawEvents st]
+  [hBox ([drawEvents st] ++ [drawEvents st])]
 
 -- arrowLayer :: Widget Name
 -- arrowLayer =
@@ -87,7 +89,7 @@ drawEvents st =
     -- rawEvents :: [C.VEvent]
     rawEvents = concatMap (elems . C.vcEvents) (st ^. rawCalendars)
     events = mapMaybe (flip prepareEventInfo (st ^. timeZone)) rawEvents
-    drawEvent event = (txt . toStrict . fromMaybe "" . eventTitle) event <=> (str $ show $ fst $ eventDuration event)
+    drawEvent event = (txt . toStrict . fromMaybe "" . eventDescription) event <=> (str $ show $ fst $ eventDuration event)
 
 appEvent :: T.BrickEvent Name e -> T.EventM Name St ()
 -- appEvent (T.VtyEvent (V.EvKey V.KDown []))  =

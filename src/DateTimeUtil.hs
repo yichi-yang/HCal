@@ -8,16 +8,18 @@ where
 
 import Data.Fixed (Fixed (MkFixed))
 import Data.Text.Encoding (encodeUtf8)
-import Data.Text.Lazy (Text, toStrict)
+import Data.Text.Lazy (Text, toStrict, take, pack)
 import Data.Time (LocalTime (LocalTime), NominalDiffTime, addLocalTime, midnight, secondsToNominalDiffTime)
 import Data.Time.LocalTime (TimeZone, utcToLocalTime)
 import Data.Time.Zones qualified as TZ
 import Data.Time.Zones.All qualified as TZ
 import Text.ICalendar.Types qualified as C
 import Config(defaultEventDuration)
+import Data.Maybe
 
 class ToLocalTime a where
   toLocalTime :: a -> TimeZone -> Maybe LocalTime
+
 
 instance ToLocalTime C.DateTime where
   toLocalTime (C.FloatingDateTime localTime) _ = return localTime
