@@ -41,7 +41,7 @@ import Brick.Widgets.Core
     (<+>),
     (<=>),
   )
-import Config (logicalDurationResolution)
+import Config (logicalTimeResolution, timelineTopBottomPadding)
 import Control.Lens.At (ix)
 import Control.Monad.State.Lazy
   ( MonadState (get, put),
@@ -100,6 +100,7 @@ drawUi :: St -> [BT.Widget Name]
 drawUi st =
   [drawEventViewport st]
 
+-- draw the viewport with scrolling bar
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
   where
@@ -132,6 +133,7 @@ joinableHBorder =
     <+> joinableBorder (Edges False False True False)
 
 drawAllDayEvents :: [UIEventInfo] -> BT.Widget Name
+drawAllDayEvents [] = emptyWidget
 drawAllDayEvents events = padLeft (Pad 6) $ vBox (map drawEventBody events) <=> joinableHBorder
   where
     drawEventBody UIEventInfo {uiEventInfo = eventInfo, uiSelected = selected, uiDurationDescription = durationStr} =
@@ -146,12 +148,21 @@ drawNormalEvents :: [UIEventInfo] -> BT.Widget Name
 drawNormalEvents [] = padLeft (Pad 6) $ txt "Your timeline is empty today :)"
 drawNormalEvents events = timelineWidget <+> hBox (zipWith withPadTop startTimes columnWidgets)
   where
+    -- split events into non-overlapping columns
     columns = splitEventsToColumns events
-    (columnWidgets, startTimes) = unzip $ map drawEventColumn columns
-    withPadTop amount = padTop (Pad amount)
+    -- draw individual columns
+    (columnWidgets, startTimes, endTimes) = unzip3 $ map drawEventColumn columns
+    -- start and end time on the timeline
+    startTime = max 0 $ minimum startTimes - timelineTopBottomPadding
+    endTime = min (fromInteger $ round $ nominalDay / logicalTimeResolution) (maximum endTimes + timelineTopBottomPadding)
+    -- add the right amount of top padding to each column to align with the timeline
+    withPadTop amount = padTop (Pad (amount - startTime))
     timelineWidget = padRight (Pad 1) $ vBox $ map str timeOfDayStr
     timeOfDayStr = map (formatTime defaultTimeLocale "%R") timeSteps
-    timeSteps = map (snd . timeToDaysAndTimeOfDay) [0, logicalDurationResolution .. nominalDay]
+    timeSteps =
+      map
+        (snd . timeToDaysAndTimeOfDay . (* logicalTimeResolution) . fromIntegral)
+        [startTime, startTime + 1 .. endTime]
 
 -- Split uiEvents into n non-overlapping columns
 splitEventsToColumns :: [UIEventInfo] -> [NE.NonEmpty UIEventInfo]
@@ -188,11 +199,12 @@ splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelpe
                 put $ columns & ix bestI .~ event NE.<| bestColumn
                 splitHelper rest
 
--- return the column of events and the logical start time of the first event
-drawEventColumn :: NE.NonEmpty UIEventInfo -> (BT.Widget Name, Int)
+-- return (column of events, start time of the first event, end time of last event)
+drawEventColumn :: NE.NonEmpty UIEventInfo -> (BT.Widget Name, Int, Int)
 drawEventColumn uiEvents =
   ( vBox $ NE.toList $ NE.zipWith drawEventBody timeBetweenEvents uiEvents,
-    fst $ uiLogicalDuration $ NE.head uiEvents
+    fst $ uiLogicalDuration $ NE.head uiEvents,
+    snd $ uiLogicalDuration $ NE.last uiEvents
   )
   where
     -- Time after each event before the next one starts
