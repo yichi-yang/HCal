@@ -11,7 +11,7 @@ module DateTimeUtil
   )
 where
 
-import Config (logicalDurationResolution, minLogicalDuration)
+import Config (logicalTimeResolution, minLogicalDuration)
 import Data.Fixed (Fixed (MkFixed))
 import Data.Ord (clamp)
 import Data.Text.Encoding (encodeUtf8)
@@ -71,7 +71,7 @@ happensOn day (start, end) = not $ end <= dayStart || start >= dayEnd
     dayEnd = addLocalTime nominalDay dayStart
 
 toLogicalTime :: Day -> LocalTime -> Int
-toLogicalTime day time = round $ clampedDiff / logicalDurationResolution
+toLogicalTime day time = round $ clampedDiff / logicalTimeResolution
   where
     dayStart = LocalTime day midnight
     diff = diffLocalTime time dayStart

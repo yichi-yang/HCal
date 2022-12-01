@@ -24,12 +24,12 @@ import Brick.Widgets.Border (hBorder, hBorderWithLabel, joinableBorder, vBorder)
 import Brick.Widgets.Core
   ( Padding (..),
     emptyWidget,
-    fill,
     hBox,
     joinBorders,
     padBottom,
     padLeft,
     padRight,
+    padTop,
     str,
     txt,
     vBox,
@@ -41,12 +41,11 @@ import Brick.Widgets.Core
     (<+>),
     (<=>),
   )
-import Config (logicalDurationResolution)
+import Config (logicalTimeResolution, timelineTopBottomPadding)
 import Control.Lens.At (ix)
 import Control.Monad.State.Lazy
   ( MonadState (get, put),
     State,
-    evalState,
     execState,
     modify,
   )
@@ -101,6 +100,7 @@ drawUi :: St -> [BT.Widget Name]
 drawUi st =
   [drawEventViewport st]
 
+-- draw the viewport with scrolling bar
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
   where
@@ -133,6 +133,7 @@ joinableHBorder =
     <+> joinableBorder (Edges False False True False)
 
 drawAllDayEvents :: [UIEventInfo] -> BT.Widget Name
+drawAllDayEvents [] = emptyWidget
 drawAllDayEvents events = padLeft (Pad 6) $ vBox (map drawEventBody events) <=> joinableHBorder
   where
     drawEventBody UIEventInfo {uiEventInfo = eventInfo, uiSelected = selected, uiDurationDescription = durationStr} =
@@ -145,12 +146,23 @@ drawAllDayEvents events = padLeft (Pad 6) $ vBox (map drawEventBody events) <=> 
 
 drawNormalEvents :: [UIEventInfo] -> BT.Widget Name
 drawNormalEvents [] = padLeft (Pad 6) $ txt "Your timeline is empty today :)"
-drawNormalEvents events = drawTimeline <+> hBox (map (drawEventColumn . NE.toList) columns)
+drawNormalEvents events = timelineWidget <+> hBox (zipWith withPadTop startTimes columnWidgets)
   where
+    -- split events into non-overlapping columns
     columns = splitEventsToColumns events
-    drawTimeline = padRight (Pad 1) $ vBox $ map str timeOfDayStr
+    -- draw individual columns
+    (columnWidgets, startTimes, endTimes) = unzip3 $ map drawEventColumn columns
+    -- start and end time on the timeline
+    startTime = max 0 $ minimum startTimes - timelineTopBottomPadding
+    endTime = min (fromInteger $ round $ nominalDay / logicalTimeResolution) (maximum endTimes + timelineTopBottomPadding)
+    -- add the right amount of top padding to each column to align with the timeline
+    withPadTop amount = padTop (Pad (amount - startTime))
+    timelineWidget = padRight (Pad 1) $ vBox $ map str timeOfDayStr
     timeOfDayStr = map (formatTime defaultTimeLocale "%R") timeSteps
-    timeSteps = map (snd . timeToDaysAndTimeOfDay) [0, logicalDurationResolution .. nominalDay]
+    timeSteps =
+      map
+        (snd . timeToDaysAndTimeOfDay . (* logicalTimeResolution) . fromIntegral)
+        [startTime, startTime + 1 .. endTime]
 
 -- Split uiEvents into n non-overlapping columns
 splitEventsToColumns :: [UIEventInfo] -> [NE.NonEmpty UIEventInfo]
@@ -167,8 +179,7 @@ splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelpe
         -- if we have no column, just add one
         [] -> do
           put [NE.fromList [event]]
-          _ <- splitHelper rest
-          return ()
+          splitHelper rest
         -- if we have existing columns, check to see if they fit the current event
         _ ->
           do
@@ -182,56 +193,62 @@ splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelpe
               then -- if it doesn't fit, create a new column
               do
                 put $ NE.fromList [event] : columns
-                _ <- splitHelper rest
-                return ()
+                splitHelper rest
               else -- else just append to that column
               do
                 put $ columns & ix bestI .~ event NE.<| bestColumn
-                _ <- splitHelper rest
-                return ()
+                splitHelper rest
 
--- draw a single column of events
-drawEventColumn :: [UIEventInfo] -> BT.Widget Name
-drawEventColumn events = evalState (drawHelper $ reverse events) Nothing
+-- return (column of events, start time of the first event, end time of last event)
+drawEventColumn :: NE.NonEmpty UIEventInfo -> (BT.Widget Name, Int, Int)
+drawEventColumn uiEvents =
+  ( vBox $ NE.toList $ NE.zipWith drawEventBody timeBetweenEvents uiEvents,
+    fst $ uiLogicalDuration $ NE.head uiEvents,
+    snd $ uiLogicalDuration $ NE.last uiEvents
+  )
   where
-    getBottomBorder :: Int -> Int -> BT.Widget Name
-    getBottomBorder row end
-      | row == end = emptyWidget
-      | row > end = padBottom (Pad (row - end - 1)) joinableHBorder
-      | otherwise = error $ "Events in a column must not overlap -> " ++ show events
-    drawHelper :: [UIEventInfo] -> State (Maybe Int) (BT.Widget Name)
-    drawHelper [] = do
-      maybeRow <- get
-      let padding = case maybeRow of
-            Nothing -> joinableHBorder
-            Just row -> vLimit row $ fill ' '
-      return padding
-    drawHelper
-      ( UIEventInfo
-          { uiEventInfo = eventInfo,
-            uiLogicalDuration = (start, end),
-            uiSelected = selected,
-            uiDurationDescription = durationStr
-          }
-          : rest
-        ) = do
-        maybeRow <- get
-        let EventInfo {eiTitle = title} = eventInfo
-            row1 = txt $ toStrict $ fromMaybe "[No Title]" title
-            row2 = str durationStr
-            contentHeight = end - start - 1
-            internalPadding = contentHeight - 2
-            content = padBottom (Pad internalPadding) $ padRight Max (row1 <=> row2)
-            (setVisible, setSelected) = getWithAttrIfSelected selected
-            body =
-              setVisible $
-                joinableHBorder <=> vLimit contentHeight (vBorder <+> setSelected content <+> vBorder)
-            bottomBorder = case maybeRow of
-              Nothing -> joinableHBorder
-              Just row -> getBottomBorder row end
-        put $ Just start
-        widgetRest <- drawHelper rest
-        return $ widgetRest <=> body <=> bottomBorder
+    -- Time after each event before the next one starts
+    -- Set it to 1 for the last event to make sure the last border is drawn
+    timeBetweenEvents :: NE.NonEmpty Int
+    timeBetweenEvents =
+      NE.prependList
+        (zipWith getTimeBetween (NE.toList uiEvents) (NE.tail uiEvents))
+        (1 NE.:| [])
+
+    getTimeBetween :: UIEventInfo -> UIEventInfo -> Int
+    getTimeBetween lhs rhs
+      | endLhs > startRhs = error "Events in a column should not overlap"
+      | otherwise = startRhs - endLhs
+      where
+        (_, endLhs) = uiLogicalDuration lhs
+        (startRhs, _) = uiLogicalDuration rhs
+
+    drawEventBody :: Int -> UIEventInfo -> BT.Widget Name
+    drawEventBody
+      spaceAfter
+      UIEventInfo
+        { uiEventInfo = eventInfo,
+          uiSelected = selected,
+          uiDurationDescription = durationStr,
+          uiLogicalDuration = (start, end)
+        } =
+        withPaddingAfter $ -- add padding after this cell if necessary
+          setVisible $ -- make cell visible when selected
+            joinableHBorder
+              -- highlight cell content when selected
+              <=> setSelected (vLimit contentHeight $ vBorder <+> padRight Max (row1 <=> row2) <+> vBorder)
+              <=> bottomBorder
+        where
+          EventInfo {eiTitle = title} = eventInfo
+          row1 = txt $ toStrict $ fromMaybe "[No Title]" title
+          row2 = str durationStr
+          contentHeight = end - start - 1
+          -- the next cel may share the current cell's bottom border
+          (bottomBorder, withPaddingAfter) = case spaceAfter of
+            0 -> (emptyWidget, id)
+            1 -> (joinableHBorder, id)
+            _ -> (joinableHBorder, padBottom (Pad $ spaceAfter - 1))
+          (setVisible, setSelected) = getWithAttrIfSelected selected
 
 -- Creates a new ListCursor UIEventInfo by selecting all events that
 -- overlaps with activateDay and setting the first event as the selected
@@ -269,8 +286,7 @@ appStartEvent = do
   let activeDay = st ^. stActiveDay
       timeZone = st ^. stTimeZone
       rawEvents = concatMap (elems . C.vcEvents) (st ^. stRawCalendars)
-  _ <- put (st & stCursor .~ buildListCursor activeDay timeZone rawEvents)
-  return ()
+  put (st & stCursor .~ buildListCursor activeDay timeZone rawEvents)
 
 -- Update stActiveDay with f and update the cursor accordingly
 updateActiveDay :: (Day -> Day) -> St -> St
