@@ -55,7 +55,7 @@ import Data.Function (on)
 import Data.List (minimumBy, partition, sortOn)
 import Data.List.NonEmpty qualified as NE
 import Data.Map.Strict (elems)
-import Data.Maybe (fromMaybe, mapMaybe, isJust)
+import Data.Maybe (fromMaybe, mapMaybe)
 import Data.Text.Lazy (toStrict)
 import Data.Time
   ( Day,
