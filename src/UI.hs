@@ -40,7 +40,9 @@ import Brick.Widgets.Core
     withVScrollBars,
     (<+>),
     (<=>),
+    txtWrap
   )
+import Brick.Widgets.Dialog
 import Config (logicalTimeResolution, timelineTopBottomPadding)
 import Control.Lens.At (ix)
 import Control.Monad.State.Lazy
@@ -53,7 +55,7 @@ import Data.Function (on)
 import Data.List (minimumBy, partition, sortOn)
 import Data.List.NonEmpty qualified as NE
 import Data.Map.Strict (elems)
-import Data.Maybe (fromMaybe, mapMaybe)
+import Data.Maybe (fromMaybe, mapMaybe, isJust)
 import Data.Text.Lazy (toStrict)
 import Data.Time
   ( Day,
@@ -87,7 +89,8 @@ data St = St
   { _stRawCalendars :: [C.VCalendar],
     _stTimeZone :: TimeZone,
     _stActiveDay :: Day,
-    _stCursor :: Maybe (ListCursor UIEventInfo)
+    _stCursor :: Maybe (ListCursor UIEventInfo),
+    _stDescOpen :: Bool
   }
 
 makeLenses ''St
@@ -98,9 +101,21 @@ data Name
 
 drawUi :: St -> [BT.Widget Name]
 drawUi st =
-  [drawEventViewport st]
+  [ if st^.stDescOpen 
+      then
+        descStr (st ^. stCursor)
+      else
+        emptyWidget,
+    drawEventViewport st]
 
 -- draw the viewport with scrolling bar
+descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
+descStr Nothing = emptyWidget
+descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newdes) 
+            where 
+              newdes=(fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor))
+              dia1 = dialog (Just "Description") Nothing 50
+
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
   where
@@ -290,7 +305,7 @@ appStartEvent = do
 
 -- Update stActiveDay with f and update the cursor accordingly
 updateActiveDay :: (Day -> Day) -> St -> St
-updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay
+updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDescOpen .~ False
   where
     activeDay = f $ st ^. stActiveDay
     timeZone = st ^. stTimeZone
@@ -307,6 +322,8 @@ appEvent (BT.VtyEvent (V.EvKey V.KRight [])) = do
 appEvent (BT.VtyEvent (V.EvKey V.KLeft [])) =
   modify $ updateActiveDay pred
 appEvent (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
+appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) = 
+  stDescOpen %= not
 appEvent _ = return ()
 
 selectedAttr :: AttrName

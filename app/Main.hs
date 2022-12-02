@@ -34,7 +34,8 @@ main = do
                 { _stRawCalendars = parsedCalendars,
                   _stTimeZone = currTimeZone,
                   _stActiveDay = localDay localTime,
-                  _stCursor = Nothing
+                  _stCursor = Nothing,
+                  _stDescOpen = False
                 }
     _ -> do
       putStrLn "Usage: hcal example.ics"
