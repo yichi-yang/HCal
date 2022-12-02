@@ -46,7 +46,6 @@ jobs:
         with:
           enable-stack: true
           stack-setup-ghc: true
-          stack-no-global: true
       
       - name: Build
         run: stack build --pedantic
