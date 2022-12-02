@@ -45,8 +45,8 @@ jobs:
         uses: haskell/actions/setup@v2
         with:
           enable-stack: true
-          stack-version: 'latest'
           stack-setup-ghc: true
+          stack-no-global: true
       
       - name: Build
         run: stack build --pedantic
