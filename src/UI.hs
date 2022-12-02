@@ -100,21 +100,16 @@ data Name
   deriving (Ord, Eq, Show)
 
 drawUi :: St -> [BT.Widget Name]
-drawUi st =
-  [ if st^.stDescOpen 
-      then
-        descStr (st ^. stCursor)
-      else
-        emptyWidget,
-    drawEventViewport st]
-
--- draw the viewport with scrolling bar
-descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
-descStr Nothing = emptyWidget
-descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newdes) 
-            where 
-              newdes=(fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor))
-              dia1 = dialog (Just "Description") Nothing 50
+drawUi st 
+ | st^. stDescOpen = [descStr (st ^. stCursor),drawEventViewport st]     
+ | otherwise       = [emptyWidget,drawEventViewport st]
+  where 
+      descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
+      descStr Nothing = emptyWidget
+      descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newdes) 
+        where 
+            newdes = fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor)
+            dia1 = dialog (Just "Description") Nothing 50
 
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
