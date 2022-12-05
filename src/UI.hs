@@ -63,7 +63,7 @@ import Data.List (minimumBy, partition, sortOn)
 import Data.List.NonEmpty qualified as NE
 import Data.Map.Strict (elems)
 import Data.Maybe (fromMaybe, mapMaybe)
-import Data.Text.Lazy (toStrict)
+import Data.Text.Lazy (toStrict,pack)
 import Data.Time
   ( Day,
     TimeZone,
@@ -97,7 +97,8 @@ data St = St
     _stTimeZone :: TimeZone,
     _stActiveDay :: Day,
     _stCursor :: Maybe (ListCursor UIEventInfo),
-    _stDescOpen :: Bool
+    _stDescOpen :: Bool,
+    _stInputOpen ::Bool
   }
 
 makeLenses ''St
@@ -108,6 +109,7 @@ data Name
 
 drawUi :: St -> [BT.Widget Name]
 drawUi st 
+ | st^. stInputOpen = [inputStr, drawEventViewport st]
  | st^. stDescOpen = [descStr (st ^. stCursor), drawEventViewport st]     
  | otherwise       = [emptyWidget, drawEventViewport st]
   where 
@@ -119,6 +121,12 @@ drawUi st
             newNewDes = if newdes == "" then "No description" else newdes
             dia1 = dialog (Just "Description") Nothing 50
 
+inputStr :: BT.Widget Name
+inputStr = renderDialog dia1 (txtWrap $ toStrict $ pack aaa)
+   where 
+      aaa = unsafePerformIO getLine
+      dia1 = dialog (Just "Input Date") Nothing 50
+    
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
   where
@@ -308,7 +316,7 @@ appStartEvent = do
 
 -- Update stActiveDay with f and update the cursor accordingly
 updateActiveDay :: (Day -> Day) -> St -> St
-updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDescOpen .~ False
+updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDescOpen .~ False & stInputOpen .~ False
   where
     activeDay = f $ st ^. stActiveDay
     timeZone = st ^. stTimeZone
@@ -345,6 +353,8 @@ appEvent (BT.VtyEvent (V.EvKey (V.KChar 'p') [])) =
 appEvent (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
 appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) = 
   stDescOpen %= not
+appEvent (BT.VtyEvent (V.EvKey (V.KChar 'm') [])) = 
+  stInputOpen %= not
 appEvent _ = return ()
 
 selectedAttr :: AttrName

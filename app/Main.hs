@@ -35,7 +35,8 @@ main = do
                   _stTimeZone = currTimeZone,
                   _stActiveDay = localDay localTime,
                   _stCursor = Nothing,
-                  _stDescOpen = False
+                  _stDescOpen = False,
+                  _stInputOpen = False
                 }
     _ -> do
       putStrLn "Usage: hcal example.ics"
