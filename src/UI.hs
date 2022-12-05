@@ -32,6 +32,7 @@ import Brick.Widgets.Core
     padTop,
     str,
     txt,
+    txtWrap,
     vBox,
     vLimit,
     viewport,
@@ -40,18 +41,11 @@ import Brick.Widgets.Core
     withVScrollBars,
     (<+>),
     (<=>),
-    txtWrap
-  )
-
-import Data.Time
-  ( LocalTime (localDay),
-    getCurrentTime,
-    getCurrentTimeZone,
-    utcToLocalTime,
   )
 import Brick.Widgets.Dialog
 import Config (logicalTimeResolution, timelineTopBottomPadding)
 import Control.Lens.At (ix)
+import Control.Monad.IO.Class (liftIO)
 import Control.Monad.State.Lazy
   ( MonadState (get, put),
     State,
@@ -66,11 +60,15 @@ import Data.Maybe (fromMaybe, mapMaybe)
 import Data.Text.Lazy (toStrict)
 import Data.Time
   ( Day,
+    LocalTime (localDay),
     TimeZone,
     defaultTimeLocale,
     formatTime,
+    getCurrentTime,
+    getCurrentTimeZone,
     nominalDay,
     timeToDaysAndTimeOfDay,
+    utcToLocalTime,
   )
 import DateTimeUtil
   ( getDateTimeDurationDescription,
@@ -89,7 +87,6 @@ import Lens.Micro.Mtl ((%=))
 import Lens.Micro.TH (makeLenses)
 import ListCursor (ListCursor (..), mapToList, next, prev, tryApply)
 import Text.ICalendar.Types qualified as C
-import GHC.IO (unsafePerformIO)
 
 -- State of our app
 data St = St
@@ -107,17 +104,17 @@ data Name
   deriving (Ord, Eq, Show)
 
 drawUi :: St -> [BT.Widget Name]
-drawUi st 
- | st^. stDescOpen = [descStr (st ^. stCursor), drawEventViewport st]     
- | otherwise       = [emptyWidget, drawEventViewport st]
-  where 
-      descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
-      descStr Nothing = emptyWidget
-      descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newNewDes) 
-        where 
-            newdes = fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor)
-            newNewDes = if newdes == "" then "No description" else newdes
-            dia1 = dialog (Just "Description") Nothing 50
+drawUi st
+  | st ^. stDescOpen = [descStr (st ^. stCursor), drawEventViewport st]
+  | otherwise = [emptyWidget, drawEventViewport st]
+  where
+    descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
+    descStr Nothing = emptyWidget
+    descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newNewDes)
+      where
+        newdes = fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor)
+        newNewDes = if newdes == "" then "No description" else newdes
+        dia1 = dialog (Just "Description") Nothing 50
 
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
@@ -315,21 +312,8 @@ updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDe
     rawEvents = concatMap (elems . C.vcEvents) (st ^. stRawCalendars)
     cursor = buildListCursor activeDay timeZone rawEvents
 
-
-giveCurrDay :: Day -> Day
-giveCurrDay _ = localDay (utcToLocalTime currTimeZone utcNow)
-   where
-    currTimeZone = unsafePerformIO getCurrentTimeZone
-    utcNow = unsafePerformIO getCurrentTime
-
-
--- goToToday :: St -> St
--- updateActiveDay st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDescOpen .~ False
---   where
---     activeDay = st ^. stActiveDay
---     timeZone = st ^. stTimeZone
---     rawEvents = concatMap (elems . C.vcEvents) (st ^. stRawCalendars)
---     cursor = buildListCursor activeDay timeZone rawEvents
+updateTimeZone :: TimeZone -> St -> St
+updateTimeZone timeZone st = st & stTimeZone .~ timeZone
 
 appEvent :: BT.BrickEvent Name e -> BT.EventM Name St ()
 appEvent (BT.VtyEvent (V.EvKey V.KDown [])) =
@@ -340,10 +324,13 @@ appEvent (BT.VtyEvent (V.EvKey V.KRight [])) = do
   modify $ updateActiveDay succ
 appEvent (BT.VtyEvent (V.EvKey V.KLeft [])) =
   modify $ updateActiveDay pred
-appEvent (BT.VtyEvent (V.EvKey (V.KChar 'p') [])) =
-  modify $ updateActiveDay giveCurrDay
+appEvent (BT.VtyEvent (V.EvKey (V.KChar 'p') [])) = do
+  utcTime <- liftIO getCurrentTime
+  timeZone <- liftIO getCurrentTimeZone
+  let today = localDay $ utcToLocalTime timeZone utcTime
+  modify $ updateTimeZone timeZone . updateActiveDay (const today)
 appEvent (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
-appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) = 
+appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) =
   stDescOpen %= not
 appEvent _ = return ()
 
