@@ -42,6 +42,13 @@ import Brick.Widgets.Core
     (<=>),
     txtWrap
   )
+
+import Data.Time
+  ( LocalTime (localDay),
+    getCurrentTime,
+    getCurrentTimeZone,
+    utcToLocalTime,
+  )
 import Brick.Widgets.Dialog
 import Config (logicalTimeResolution, timelineTopBottomPadding)
 import Control.Lens.At (ix)
@@ -83,6 +90,7 @@ import Lens.Micro.Mtl ((%=))
 import Lens.Micro.TH (makeLenses)
 import ListCursor (ListCursor (..), mapToList, next, prev, tryApply)
 import Text.ICalendar.Types qualified as C
+import GHC.IO (unsafePerformIO)
 
 -- State of our app
 data St = St
@@ -101,14 +109,15 @@ data Name
 
 drawUi :: St -> [BT.Widget Name]
 drawUi st 
- | st^. stDescOpen = [descStr (st ^. stCursor),drawEventViewport st]     
- | otherwise       = [emptyWidget,drawEventViewport st]
+ | st^. stDescOpen = [descStr (st ^. stCursor), drawEventViewport st]     
+ | otherwise       = [emptyWidget, drawEventViewport st]
   where 
       descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
       descStr Nothing = emptyWidget
-      descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newdes) 
+      descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newNewDes) 
         where 
             newdes = fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor)
+            newNewDes = if newdes == "" then "No description" else newdes
             dia1 = dialog (Just "Description") Nothing 50
 
 drawEventViewport :: St -> BT.Widget Name
@@ -307,6 +316,22 @@ updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDe
     rawEvents = concatMap (elems . C.vcEvents) (st ^. stRawCalendars)
     cursor = buildListCursor activeDay timeZone rawEvents
 
+
+giveCurrDay :: Day -> Day
+giveCurrDay _ = localDay (utcToLocalTime currTimeZone utcNow)
+   where
+    currTimeZone = unsafePerformIO getCurrentTimeZone
+    utcNow = unsafePerformIO getCurrentTime
+
+
+-- goToToday :: St -> St
+-- updateActiveDay st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDescOpen .~ False
+--   where
+--     activeDay = st ^. stActiveDay
+--     timeZone = st ^. stTimeZone
+--     rawEvents = concatMap (elems . C.vcEvents) (st ^. stRawCalendars)
+--     cursor = buildListCursor activeDay timeZone rawEvents
+
 appEvent :: BT.BrickEvent Name e -> BT.EventM Name St ()
 appEvent (BT.VtyEvent (V.EvKey V.KDown [])) =
   stCursor %= tryApply next
@@ -316,6 +341,8 @@ appEvent (BT.VtyEvent (V.EvKey V.KRight [])) = do
   modify $ updateActiveDay succ
 appEvent (BT.VtyEvent (V.EvKey V.KLeft [])) =
   modify $ updateActiveDay pred
+appEvent (BT.VtyEvent (V.EvKey V.KDel [])) =
+  modify $ updateActiveDay giveCurrDay
 appEvent (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
 appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) = 
   stDescOpen %= not
