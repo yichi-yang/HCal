@@ -66,7 +66,6 @@ import Data.Maybe (fromMaybe, mapMaybe)
 import Data.Text.Lazy (toStrict)
 import Data.Time
   ( Day,
-    LocalTime,
     TimeZone,
     defaultTimeLocale,
     formatTime,
@@ -341,7 +340,7 @@ appEvent (BT.VtyEvent (V.EvKey V.KRight [])) = do
   modify $ updateActiveDay succ
 appEvent (BT.VtyEvent (V.EvKey V.KLeft [])) =
   modify $ updateActiveDay pred
-appEvent (BT.VtyEvent (V.EvKey V.KDel [])) =
+appEvent (BT.VtyEvent (V.EvKey (V.KChar 'p') [])) =
   modify $ updateActiveDay giveCurrDay
 appEvent (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
 appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) = 
