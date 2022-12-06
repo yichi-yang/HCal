@@ -4,7 +4,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module UI (app, St (..)) where
+module UI (app, St (..), toUIEventInfo, splitEventsToColumns) where
 
 #if !(MIN_VERSION_base(4,11,0))
 import Data.Monoid ((<>))
@@ -79,6 +79,7 @@ import DateTimeUtil
 import EventInfo
   ( EventInfo (..),
     UIEventInfo (..),
+    eventSortKey,
     prepareEventInfo,
   )
 import Graphics.Vty qualified as V
@@ -183,8 +184,8 @@ drawNormalEvents events = timelineWidget <+> hBox (zipWith withPadTop startTimes
 splitEventsToColumns :: [UIEventInfo] -> [NE.NonEmpty UIEventInfo]
 splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelper uiEvents) []
   where
-    getColumnEndTime :: NE.NonEmpty UIEventInfo -> LocalTime
-    getColumnEndTime column = snd $ eiDuration $ uiEventInfo $ NE.head column
+    getColumnEndTime :: NE.NonEmpty UIEventInfo -> Int
+    getColumnEndTime column = snd $ uiLogicalDuration $ NE.head column
     splitHelper :: [UIEventInfo] -> State [NE.NonEmpty UIEventInfo] ()
     splitHelper [] = return ()
     splitHelper (event : rest) = do
@@ -198,7 +199,7 @@ splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelpe
         -- if we have existing columns, check to see if they fit the current event
         _ ->
           do
-            let startTime = fst $ eiDuration $ uiEventInfo event
+            let startTime = fst $ uiLogicalDuration event
                 pairs :: [(Int, NE.NonEmpty UIEventInfo)]
                 pairs = zip [0 ..] columns
                 -- find the column with earliest ending time
@@ -278,21 +279,22 @@ buildListCursor activeDay timeZone rawEvents = case uiEvents of
     -- sort by (is all day, start date time, uid) ascending
     sortedEventInfo = sortOn eventSortKey events
     -- add information needed for drawing events
-    uiEvents = map toUIEventInfo sortedEventInfo
-    eventSortKey EventInfo {eiDuration = (start, _), eiUID = uid, eiAllDay = allDay} = (not allDay, start, uid)
-    toUIEventInfo ei =
-      let duration = eiDuration ei
-          allDay = eiAllDay ei
-          durationDescription =
-            if allDay
-              then getDayDurationDescription activeDay duration
-              else getDateTimeDurationDescription activeDay duration
-       in UIEventInfo
-            { uiEventInfo = ei,
-              uiLogicalDuration = getLogicalDuration activeDay duration,
-              uiSelected = False, -- set it to false For now
-              uiDurationDescription = durationDescription
-            }
+    uiEvents = map (toUIEventInfo activeDay) sortedEventInfo
+
+toUIEventInfo :: Day -> EventInfo -> UIEventInfo
+toUIEventInfo activeDay ei =
+  let duration = eiDuration ei
+      allDay = eiAllDay ei
+      durationDescription =
+        if allDay
+          then getDayDurationDescription activeDay duration
+          else getDateTimeDurationDescription activeDay duration
+   in UIEventInfo
+        { uiEventInfo = ei,
+          uiLogicalDuration = getLogicalDuration activeDay duration,
+          uiSelected = False, -- set it to false For now
+          uiDurationDescription = durationDescription
+        }
 
 -- Initialize the cursor
 appStartEvent :: BT.EventM Name St ()
