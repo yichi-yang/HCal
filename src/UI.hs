@@ -184,8 +184,8 @@ drawNormalEvents events = timelineWidget <+> hBox (zipWith withPadTop startTimes
 splitEventsToColumns :: [UIEventInfo] -> [NE.NonEmpty UIEventInfo]
 splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelper uiEvents) []
   where
-    getColumnEndTime :: NE.NonEmpty UIEventInfo -> LocalTime
-    getColumnEndTime column = snd $ eiDuration $ uiEventInfo $ NE.head column
+    getColumnEndTime :: NE.NonEmpty UIEventInfo -> Int
+    getColumnEndTime column = snd $ uiLogicalDuration $ NE.head column
     splitHelper :: [UIEventInfo] -> State [NE.NonEmpty UIEventInfo] ()
     splitHelper [] = return ()
     splitHelper (event : rest) = do
@@ -199,7 +199,7 @@ splitEventsToColumns uiEvents = reverse $ map NE.reverse $ execState (splitHelpe
         -- if we have existing columns, check to see if they fit the current event
         _ ->
           do
-            let startTime = fst $ eiDuration $ uiEventInfo event
+            let startTime = fst $ uiLogicalDuration event
                 pairs :: [(Int, NE.NonEmpty UIEventInfo)]
                 pairs = zip [0 ..] columns
                 -- find the column with earliest ending time
