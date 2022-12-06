@@ -4,7 +4,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module UI (app, St (..), toUIEventInfo, splitEventsToColumns) where
+module UI (app, St (..), toUIEventInfo, splitEventsToColumns, initSt) where
 
 #if !(MIN_VERSION_base(4,11,0))
 import Data.Monoid ((<>))
@@ -20,11 +20,13 @@ import Brick.BorderMap (Edges (..))
 import Brick.Main qualified as BM
 import Brick.Types qualified as BT
 import Brick.Util qualified as BU
-import Brick.Widgets.Border (hBorder, hBorderWithLabel, joinableBorder, vBorder)
+import Brick.Widgets.Border (borderWithLabel, hBorder, hBorderWithLabel, joinableBorder, vBorder)
+import Brick.Widgets.Center (centerLayer)
 import Brick.Widgets.Core
   ( Padding (..),
     emptyWidget,
     hBox,
+    hLimit,
     joinBorders,
     padBottom,
     padLeft,
@@ -43,6 +45,7 @@ import Brick.Widgets.Core
     (<=>),
   )
 import Brick.Widgets.Dialog
+import Brick.Widgets.Edit
 import Config (logicalTimeResolution, timelineTopBottomPadding)
 import Control.Lens.At (ix)
 import Control.Monad.IO.Class (liftIO)
@@ -67,6 +70,7 @@ import Data.Time
     getCurrentTime,
     getCurrentTimeZone,
     nominalDay,
+    parseTimeM,
     timeToDaysAndTimeOfDay,
     utcToLocalTime,
   )
@@ -89,38 +93,55 @@ import Lens.Micro.TH (makeLenses)
 import ListCursor (ListCursor (..), mapToList, next, prev, tryApply)
 import Text.ICalendar.Types qualified as C
 
+data Name
+  = EventVP
+  | DateInput
+  deriving (Ord, Eq, Show)
+
 -- State of our app
 data St = St
   { _stRawCalendars :: [C.VCalendar],
     _stTimeZone :: TimeZone,
     _stActiveDay :: Day,
     _stCursor :: Maybe (ListCursor UIEventInfo),
-    _stDescOpen :: Bool
+    _stDescOpen :: Bool,
+    _stDateInput :: Editor String Name,
+    _stDateInputOpen :: Bool,
+    _stDateInputInvalid :: Bool
   }
 
 makeLenses ''St
 
-data Name
-  = EventVP
-  deriving (Ord, Eq, Show)
-
 drawUi :: St -> [BT.Widget Name]
-drawUi st
-  | st ^. stDescOpen = [descStr (st ^. stCursor), drawEventViewport st]
-  | otherwise = [emptyWidget, drawEventViewport st]
+drawUi st = [drawModal st, drawEventViewport st]
+
+drawModal :: St -> BT.Widget Name
+drawModal st
+  | st ^. stDateInputOpen = drawDateInput $ st
+  | st ^. stDescOpen = drawDescriptionBox $ st ^. stCursor
+  | otherwise = emptyWidget
+
+drawDescriptionBox :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
+drawDescriptionBox Nothing = emptyWidget
+drawDescriptionBox (Just cursor) = renderDialog descriptionDialog (txtWrap $ toStrict description)
   where
-    descStr :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
-    descStr Nothing = emptyWidget
-    descStr (Just cursor) = renderDialog dia1 (txtWrap $ toStrict newNewDes)
-      where
-        newdes = fromMaybe "No description" (eiDescription $ uiEventInfo $ lcSelected cursor)
-        newNewDes = if newdes == "" then "No description" else newdes
-        dia1 = dialog (Just "Description") Nothing 50
+    description = case eiDescription $ uiEventInfo $ lcSelected cursor of
+      Just "" -> "No description"
+      Just text -> text
+      _ -> "No description"
+    descriptionDialog = dialog (Just "Description") Nothing 50
+
+drawDateInput :: St -> BT.Widget Name
+drawDateInput st = centerLayer $ borderWithLabel (str "Go to (MM/DD/YYYY)") $ hLimit 20 content
+  where
+    editorWidget = renderEditor (str . concat) True $ st ^. stDateInput
+    warning = if st ^. stDateInputInvalid then withAttr errorAttr $ str "Invalid date" else emptyWidget
+    content = editorWidget <=> warning
 
 drawEventViewport :: St -> BT.Widget Name
 drawEventViewport st = drawHelper $ st ^. stCursor
   where
-    label = str $ formatTime defaultTimeLocale "%D" (st ^. stActiveDay)
+    label = str $ formatTime defaultTimeLocale "%m/%d/%0Y" (st ^. stActiveDay)
     banner = withAttr bannerAttr $ hBorderWithLabel label
     drawHelper :: Maybe (ListCursor UIEventInfo) -> BT.Widget Name
     drawHelper Nothing = banner <=> drawNormalEvents []
@@ -307,7 +328,14 @@ appStartEvent = do
 
 -- Update stActiveDay with f and update the cursor accordingly
 updateActiveDay :: (Day -> Day) -> St -> St
-updateActiveDay f st = st & stCursor .~ cursor & stActiveDay .~ activeDay & stDescOpen .~ False
+updateActiveDay f st =
+  st
+    & stCursor .~ cursor
+    & stActiveDay .~ activeDay
+    & stDescOpen .~ False
+    & stDateInputOpen .~ False
+    & stDateInput .~ newEditor
+    & stDateInputInvalid .~ False
   where
     activeDay = f $ st ^. stActiveDay
     timeZone = st ^. stTimeZone
@@ -318,23 +346,45 @@ updateTimeZone :: TimeZone -> St -> St
 updateTimeZone timeZone st = st & stTimeZone .~ timeZone
 
 appEvent :: BT.BrickEvent Name e -> BT.EventM Name St ()
-appEvent (BT.VtyEvent (V.EvKey V.KDown [])) =
+appEvent event = do
+  st <- get
+  if st ^. stDateInputOpen
+    then handleDateInputEvent event
+    else handleNormalEvents event
+
+handleNormalEvents :: BT.BrickEvent Name e -> BT.EventM Name St ()
+handleNormalEvents (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
+handleNormalEvents (BT.VtyEvent (V.EvKey V.KDown [])) =
   stCursor %= tryApply next
-appEvent (BT.VtyEvent (V.EvKey V.KUp [])) =
+handleNormalEvents (BT.VtyEvent (V.EvKey V.KUp [])) =
   stCursor %= tryApply prev
-appEvent (BT.VtyEvent (V.EvKey V.KRight [])) = do
+handleNormalEvents (BT.VtyEvent (V.EvKey V.KRight [])) = do
   modify $ updateActiveDay succ
-appEvent (BT.VtyEvent (V.EvKey V.KLeft [])) =
+handleNormalEvents (BT.VtyEvent (V.EvKey V.KLeft [])) =
   modify $ updateActiveDay pred
-appEvent (BT.VtyEvent (V.EvKey (V.KChar 'p') [])) = do
+handleNormalEvents (BT.VtyEvent (V.EvKey V.KEnter [])) =
+  stDescOpen %= not
+handleNormalEvents (BT.VtyEvent (V.EvKey (V.KChar 'g') [])) =
+  stDateInputOpen %= not
+handleNormalEvents (BT.VtyEvent (V.EvKey (V.KChar 't') [])) = do
   utcTime <- liftIO getCurrentTime
   timeZone <- liftIO getCurrentTimeZone
   let today = localDay $ utcToLocalTime timeZone utcTime
   modify $ updateTimeZone timeZone . updateActiveDay (const today)
-appEvent (BT.VtyEvent (V.EvKey V.KEsc [])) = BM.halt
-appEvent (BT.VtyEvent (V.EvKey V.KEnter [])) =
-  stDescOpen %= not
-appEvent _ = return ()
+handleNormalEvents _ = return ()
+
+handleDateInputEvent :: BT.BrickEvent Name e -> BT.EventM Name St ()
+handleDateInputEvent (BT.VtyEvent (V.EvKey V.KEsc [])) =
+  stDateInputOpen %= not
+handleDateInputEvent (BT.VtyEvent (V.EvKey V.KEnter [])) = do
+  st <- get
+  let dateString = concat $ getEditContents $ st ^. stDateInput
+      parseResult :: Maybe Day
+      parseResult = parseTimeM True defaultTimeLocale "%m/%d/%0Y" dateString
+  case parseResult of
+    Nothing -> stDateInputInvalid %= const True
+    Just day -> modify $ updateActiveDay $ const day
+handleDateInputEvent event = BT.zoom stDateInput $ handleEditorEvent event
 
 selectedAttr :: AttrName
 selectedAttr = attrName "selected"
@@ -342,13 +392,34 @@ selectedAttr = attrName "selected"
 bannerAttr :: AttrName
 bannerAttr = attrName "banner"
 
+errorAttr :: AttrName
+errorAttr = attrName "error"
+
 theMap :: AttrMap
 theMap =
   attrMap
     V.defAttr
     [ (selectedAttr, V.black `BU.on` V.yellow),
-      (bannerAttr, V.black `BU.on` V.white)
+      (bannerAttr, V.black `BU.on` V.white),
+      (errorAttr, V.white `BU.on` V.red),
+      (editAttr, V.white `BU.on` V.blue)
     ]
+
+newEditor :: Editor String Name
+newEditor = editor DateInput (Just 1) ""
+
+initSt :: [C.VCalendar] -> TimeZone -> Day -> St
+initSt calendars timeZone activeDay =
+  St
+    { _stRawCalendars = calendars,
+      _stTimeZone = timeZone,
+      _stActiveDay = activeDay,
+      _stCursor = Nothing,
+      _stDescOpen = False,
+      _stDateInput = newEditor,
+      _stDateInputOpen = False,
+      _stDateInputInvalid = False
+    }
 
 app :: BM.App St e Name
 app =
