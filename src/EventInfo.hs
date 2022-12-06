@@ -1,19 +1,19 @@
 {-# LANGUAGE ImportQualifiedPost #-}
 
 module EventInfo
-  ( 
-    prepareEventInfo,
+  ( prepareEventInfo,
     EventInfo (..),
     UIEventInfo (..),
+    eventSortKey
   )
 where
 
+import Config (defaultEventDuration)
 import Data.Text.Lazy (Text)
 import Data.Time (LocalTime (..), addLocalTime)
 import Data.Time.LocalTime (TimeZone)
 import DateTimeUtil (getEndDateTime, getStartDateTime)
 import Text.ICalendar.Types qualified as C
-import Config (defaultEventDuration)
 
 -- Things about an event that we cares about
 data EventInfo = EventInfo
@@ -62,3 +62,6 @@ data UIEventInfo = UIEventInfo
     uiDurationDescription :: String
   }
   deriving (Show, Eq)
+
+eventSortKey :: EventInfo -> (Bool, LocalTime, LocalTime, Text)
+eventSortKey EventInfo {eiDuration = (start, end), eiUID = uid, eiAllDay = allDay} = (not allDay, start, end, uid)

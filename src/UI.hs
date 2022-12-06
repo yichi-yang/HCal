@@ -4,7 +4,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module UI (app, St (..)) where
+module UI (app, St (..), toUIEventInfo, splitEventsToColumns) where
 
 #if !(MIN_VERSION_base(4,11,0))
 import Data.Monoid ((<>))
@@ -79,6 +79,7 @@ import DateTimeUtil
 import EventInfo
   ( EventInfo (..),
     UIEventInfo (..),
+    eventSortKey,
     prepareEventInfo,
   )
 import Graphics.Vty qualified as V
@@ -278,21 +279,22 @@ buildListCursor activeDay timeZone rawEvents = case uiEvents of
     -- sort by (is all day, start date time, uid) ascending
     sortedEventInfo = sortOn eventSortKey events
     -- add information needed for drawing events
-    uiEvents = map toUIEventInfo sortedEventInfo
-    eventSortKey EventInfo {eiDuration = (start, _), eiUID = uid, eiAllDay = allDay} = (not allDay, start, uid)
-    toUIEventInfo ei =
-      let duration = eiDuration ei
-          allDay = eiAllDay ei
-          durationDescription =
-            if allDay
-              then getDayDurationDescription activeDay duration
-              else getDateTimeDurationDescription activeDay duration
-       in UIEventInfo
-            { uiEventInfo = ei,
-              uiLogicalDuration = getLogicalDuration activeDay duration,
-              uiSelected = False, -- set it to false For now
-              uiDurationDescription = durationDescription
-            }
+    uiEvents = map (toUIEventInfo activeDay) sortedEventInfo
+
+toUIEventInfo :: Day -> EventInfo -> UIEventInfo
+toUIEventInfo activeDay ei =
+  let duration = eiDuration ei
+      allDay = eiAllDay ei
+      durationDescription =
+        if allDay
+          then getDayDurationDescription activeDay duration
+          else getDateTimeDurationDescription activeDay duration
+   in UIEventInfo
+        { uiEventInfo = ei,
+          uiLogicalDuration = getLogicalDuration activeDay duration,
+          uiSelected = False, -- set it to false For now
+          uiDurationDescription = durationDescription
+        }
 
 -- Initialize the cursor
 appStartEvent :: BT.EventM Name St ()

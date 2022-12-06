@@ -36,16 +36,19 @@ library
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
     , brick
     , containers
     , data-default
+    , data-ordlist
     , iCalendar
     , lens
     , microlens
     , microlens-mtl
     , microlens-th
     , mtl
+    , quickcheck-instances
     , sort
     , text
     , time
@@ -61,10 +64,12 @@ executable hcal-exe
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
     , brick
     , containers
     , data-default
+    , data-ordlist
     , hcal
     , iCalendar
     , lens
@@ -72,6 +77,7 @@ executable hcal-exe
     , microlens-mtl
     , microlens-th
     , mtl
+    , quickcheck-instances
     , sort
     , text
     , time
@@ -88,10 +94,12 @@ test-suite hcal-test
       test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
     , brick
     , containers
     , data-default
+    , data-ordlist
     , hcal
     , iCalendar
     , lens
@@ -99,6 +107,7 @@ test-suite hcal-test
     , microlens-mtl
     , microlens-th
     , mtl
+    , quickcheck-instances
     , sort
     , text
     , time

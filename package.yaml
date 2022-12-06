@@ -35,6 +35,9 @@ dependencies:
 - mtl
 - sort
 - lens
+- QuickCheck
+- quickcheck-instances
+- data-ordlist
 
 ghc-options:
 - -Wall
