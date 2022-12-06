@@ -13,7 +13,7 @@ import Data.Time
   )
 import System.Environment (getArgs)
 import Text.ICalendar.Parser (parseICalendarFile)
-import UI (St (..), app)
+import UI (app, initSt)
 
 main :: IO ()
 main = do
@@ -30,12 +30,6 @@ main = do
           let localTime = utcToLocalTime currTimeZone utcNow
           void $
             BM.defaultMain app $
-              St
-                { _stRawCalendars = parsedCalendars,
-                  _stTimeZone = currTimeZone,
-                  _stActiveDay = localDay localTime,
-                  _stCursor = Nothing,
-                  _stDescOpen = False
-                }
+              initSt parsedCalendars currTimeZone (localDay localTime)
     _ -> do
       putStrLn "Usage: hcal example.ics"
